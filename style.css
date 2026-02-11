@@ -1161,3 +1161,181 @@ header, .site-header{
   .tilt-card{ transition: none !important; transform:none !important; }
   body{ background: var(--bg) !important; }
 }
+
+
+/* === HERO TERMINAL VIBE (1col) === */
+.hero.hero--terminal{
+  position: relative;
+  overflow: hidden;
+  min-height: 72vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(72px, 10vh, 120px) 24px;
+  background:
+    radial-gradient(900px 460px at var(--mx, 50%) var(--my, 30%), rgba(0,229,160,.10), transparent 60%),
+    radial-gradient(980px 560px at calc(var(--mx, 50%) + 10%) calc(var(--my, 30%) + 14%), rgba(0,163,255,.08), transparent 62%),
+    linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65)),
+    var(--bg-primary);
+}
+
+.hero--terminal .hero-inner{
+  position: relative;
+  z-index: 2;
+  width: min(980px, 100%);
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  text-align: center;
+}
+
+.hero--terminal .hero-badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(10px);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.80);
+}
+
+.hero--terminal .dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(120,255,215,.95);
+  box-shadow: 0 0 18px rgba(120,255,215,.55);
+  animation: dotPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes dotPulse{
+  0%,100%{ transform: scale(1); opacity: .85; }
+  50%{ transform: scale(1.25); opacity: 1; }
+}
+
+.hero--terminal .hero-title{
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  font-size: clamp(34px, 5vw, 64px);
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 18px 60px rgba(0,0,0,.55);
+}
+
+.hero--terminal .accent{
+  background: linear-gradient(90deg, rgba(120,255,215,.95), rgba(120,200,255,.95));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero--terminal .cursor{
+  display: inline-block;
+  margin-left: 4px;
+  transform: translateY(2px);
+  animation: blink 1.05s steps(2,end) infinite;
+  opacity: .95;
+}
+@keyframes blink{ 0%,49%{opacity:1} 50%,100%{opacity:0} }
+
+/* background elements */
+.hero--terminal .hero-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero--terminal .hero-bg::before{
+  content:"";
+  position:absolute;
+  inset:-25%;
+  background:
+    radial-gradient(40% 35% at 20% 25%, rgba(120,255,215,.18), transparent 60%),
+    radial-gradient(42% 36% at 78% 28%, rgba(120,200,255,.14), transparent 62%),
+    radial-gradient(55% 45% at 55% 80%, rgba(255,255,255,.06), transparent 65%);
+  filter: blur(42px) saturate(1.15);
+  opacity: .85;
+  animation: drift 12s ease-in-out infinite;
+  transform: translate3d(0,0,0);
+}
+@keyframes drift{
+  0%{ transform: translate3d(-2%,-1%,0) scale(1); }
+  50%{ transform: translate3d( 2%, 2%,0) scale(1.05); }
+  100%{ transform: translate3d(-2%,-1%,0) scale(1); }
+}
+.hero--terminal .hero-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.10;
+  mix-blend-mode: overlay;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.10) 0 1px, transparent 1px 3px);
+  mask-image: radial-gradient(60% 60% at 50% 45%, #000 30%, transparent 72%);
+}
+
+.hero--terminal .orb{
+  position:absolute;
+  width:420px;height:420px;
+  border-radius:999px;
+  filter: blur(52px);
+  opacity:.26;
+  mix-blend-mode: screen;
+  animation: float 10s ease-in-out infinite;
+}
+.hero--terminal .orb-a{
+  left:-120px; top:18%;
+  background: radial-gradient(circle at 30% 30%, rgba(120,255,215,.55), transparent 60%);
+}
+.hero--terminal .orb-b{
+  right:-140px; bottom:10%;
+  width:520px;height:520px;
+  opacity:.20;
+  background: radial-gradient(circle at 35% 35%, rgba(120,200,255,.50), transparent 62%);
+  animation-duration: 12s;
+}
+@keyframes float{
+  0%,100%{ transform: translate3d(0,0,0); }
+  50%{ transform: translate3d(14px,-18px,0); }
+}
+.hero--terminal .scan{
+  position:absolute;
+  left:-30%;
+  top:22%;
+  width:160%;
+  height:2px;
+  background: linear-gradient(90deg, transparent, rgba(120,255,215,.35), transparent);
+  opacity:.20;
+  transform: rotate(-6deg);
+  animation: sweep 6.5s ease-in-out infinite;
+}
+@keyframes sweep{
+  0%{ transform: translateX(-10%) rotate(-6deg); opacity:.12; }
+  50%{ transform: translateX(10%) rotate(-6deg); opacity:.26; }
+  100%{ transform: translateX(-10%) rotate(-6deg); opacity:.12; }
+}
+
+/* 기존 허접 모션 무력화 */
+.fx-wavy, .fx-wavy:hover{ filter: none !important; }
+.fx-shimmer{
+  animation: none !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  color: inherit !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero--terminal .hero-bg::before,
+  .hero--terminal .orb,
+  .hero--terminal .scan,
+  .hero--terminal .dot,
+  .hero--terminal .cursor{
+    animation: none !important;
+  }
+}
